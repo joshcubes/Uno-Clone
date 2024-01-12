@@ -16,6 +16,8 @@ turn                    = 1
 gameloop                = True
 direction               = "Positive"
 skip                    = False
+winplayer               = 0
+win                     = [False, ""]
 
 
 print("--- Welcome To Teribble Uno ---\n")
@@ -41,9 +43,9 @@ while gameloop == True:
         print("Hello Player 1 Its Your Turn: ")  
         player1_cards = deckmanager.OrganiseCards(player1_cards)
         if direction == "Positive":  
-            player1_cards, player2_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player1_cards, player2_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player1_cards, player2_cards, discard_deck, top_card, again, direction, skip, win = deckmanager.PlaceCard(player1_cards, player2_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         else:
-            player1_cards, player4_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player1_cards, player4_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player1_cards, player4_cards, discard_deck, top_card, again, direction, skip, win = deckmanager.PlaceCard(player1_cards, player4_cards, deck, discard_deck, top_card, card_conversion_table, direction)
             
         if again == True:
             turn = 1
@@ -57,6 +59,11 @@ while gameloop == True:
         if skip == True:
             turn = 3
             skip = False
+
+        if win[0] == True:
+            gameloop = False
+            turn = 5
+            winplayer = 1
         
     if (deckmanager.CountDeck(deck)[0] == 0):
         print("Reshuffling Deck")
@@ -67,9 +74,9 @@ while gameloop == True:
         player2_cards = deckmanager.OrganiseCards(player2_cards)  
         
         if direction == "Positive":  
-            player2_cards, player3_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player2_cards, player3_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player2_cards, player3_cards, discard_deck, top_card, again, direction, skip, win = deckmanager.PlaceCard(player2_cards, player3_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         else:
-            player2_cards, player1_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player2_cards, player1_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player2_cards, player1_cards, discard_deck, top_card, again, direction, skip, win = deckmanager.PlaceCard(player2_cards, player1_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         
         
         if again == True:
@@ -84,6 +91,11 @@ while gameloop == True:
         if skip == True:
             turn = 4
             skip = False
+
+        if win[0] == True:
+            gameloop = False
+            turn = 5
+            winplayer = 2
         
     if (deckmanager.CountDeck(deck)[0] == 0):
         print("Reshuffling Deck")
@@ -94,9 +106,9 @@ while gameloop == True:
         player3_cards = deckmanager.OrganiseCards(player3_cards)  
         
         if direction == "Positive":  
-            player3_cards, player4_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player3_cards, player4_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player3_cards, player4_cards, discard_deck, top_card, again, direction, skip, win = deckmanager.PlaceCard(player3_cards, player4_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         else:
-            player3_cards, player2_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player3_cards, player2_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player3_cards, player2_cards, discard_deck, top_card, again, direction, skip, win = deckmanager.PlaceCard(player3_cards, player2_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         
         
         if again == True:
@@ -112,6 +124,10 @@ while gameloop == True:
             turn = 1
             skip = False
 
+        if win[0] == True:
+            gameloop = False
+            turn = 5
+            winplayer = 3
  
     if (deckmanager.CountDeck(deck)[0] == 0):
         print("Reshuffling Deck")
@@ -122,9 +138,9 @@ while gameloop == True:
         player4_cards = deckmanager.OrganiseCards(player4_cards)          
         
         if direction == "Positive":  
-            player4_cards, player1_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player4_cards, player1_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player4_cards, player1_cards, discard_deck, top_card, again, direction, skip, win = deckmanager.PlaceCard(player4_cards, player1_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         else:
-            player4_cards, player3_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player4_cards, player3_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player4_cards, player3_cards, discard_deck, top_card, again, direction, skip, win = deckmanager.PlaceCard(player4_cards, player3_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         
         
         if again == True:
@@ -140,7 +156,14 @@ while gameloop == True:
             turn = 2
             skip = False
 
+        if win[0] == True:
+            gameloop = False
+            turn = 5
+            winplayer = 4
+
     if (deckmanager.CountDeck(deck)[0] == 0):
         print("Reshuffling Deck")
         deck, discard_deck = deckmanager.Reshuffle(deck, discard_deck)
 
+    while turn == 5:            # Win Game
+        print("Player", winplayer, "has won the game with the card:", win[1])
