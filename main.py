@@ -15,6 +15,7 @@ again                   = False
 turn                    = 1
 gameloop                = True
 direction               = "Positive"
+skip                    = False
 
 
 print("--- Welcome To Teribble Uno ---\n")
@@ -66,9 +67,9 @@ while gameloop == True:
         player2_cards = deckmanager.OrganiseCards(player2_cards)  
         
         if direction == "Positive":  
-            player2_cards, player3_cards, discard_deck, top_card, again, direction = deckmanager.PlaceCard(player2_cards, player3_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player2_cards, player3_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player2_cards, player3_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         else:
-            player2_cards, player1_cards, discard_deck, top_card, again, direction = deckmanager.PlaceCard(player2_cards, player1_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player2_cards, player1_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player2_cards, player1_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         
         
         if again == True:
@@ -93,9 +94,9 @@ while gameloop == True:
         player3_cards = deckmanager.OrganiseCards(player3_cards)  
         
         if direction == "Positive":  
-            player3_cards, player4_cards, discard_deck, top_card, again, direction = deckmanager.PlaceCard(player3_cards, player4_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player3_cards, player4_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player3_cards, player4_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         else:
-            player3_cards, player2_cards, discard_deck, top_card, again, direction = deckmanager.PlaceCard(player3_cards, player2_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player3_cards, player2_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player3_cards, player2_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         
         
         if again == True:
@@ -121,9 +122,9 @@ while gameloop == True:
         player4_cards = deckmanager.OrganiseCards(player4_cards)          
         
         if direction == "Positive":  
-            player4_cards, player1_cards, discard_deck, top_card, again, direction = deckmanager.PlaceCard(player4_cards, player1_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player4_cards, player1_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player4_cards, player1_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         else:
-            player4_cards, player3_cards, discard_deck, top_card, again, direction = deckmanager.PlaceCard(player4_cards, player3_cards, deck, discard_deck, top_card, card_conversion_table, direction)
+            player4_cards, player3_cards, discard_deck, top_card, again, direction, skip = deckmanager.PlaceCard(player4_cards, player3_cards, deck, discard_deck, top_card, card_conversion_table, direction)
         
         
         if again == True:

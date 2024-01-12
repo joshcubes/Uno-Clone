@@ -8,9 +8,9 @@ finished
 - draw 2 card
 - draw 4 card
 - reverse card
+- skip card
 ---
 not finished
-- skip card
 - call uno
 - finish game
 - nicen ui

@@ -320,6 +320,9 @@ def PlaceCard(PlayerCards, NextPlayerCards, Deck, DiscardDeck, TopCard, Converti
     validanswer = False
     skip = False
     
+    if len(PlayerCards) == 1:
+        print()
+    
     while not validanswer:
         answer = input("Are you placing a card or picking up? (place, pick): ")
         if answer.lower() == "place":
@@ -376,7 +379,7 @@ def PlaceCard(PlayerCards, NextPlayerCards, Deck, DiscardDeck, TopCard, Converti
             NextPlayerCards = OrganiseCards(NextPlayerCards)
         
         if cardToPlace[1] == "s":
-            print("skip")
+            skip = True
             
         
     else:
