@@ -318,6 +318,7 @@ def PlaceCard(PlayerCards, NextPlayerCards, Deck, DiscardDeck, TopCard, Converti
     validcardtoplace = False
     placingCard = False
     validanswer = False
+    skip = False
     
     while not validanswer:
         answer = input("Are you placing a card or picking up? (place, pick): ")
@@ -331,6 +332,8 @@ def PlaceCard(PlayerCards, NextPlayerCards, Deck, DiscardDeck, TopCard, Converti
     if placingCard == True:        
         while not validcardtoplace:
             card = joshfuncs.intinputrange("Please enter the number card that you want to place, or p to pickup a card: ", 1, len(PlayerCards)) - 1
+            
+            
             cardToPlace = PlayerCards[card]
             if (cardToPlace[0] == 'w') or (cardToPlace[0] == TopCard[0]) or (cardToPlace[1] == TopCard[1]):
                 validcardtoplace = True
@@ -338,7 +341,7 @@ def PlaceCard(PlayerCards, NextPlayerCards, Deck, DiscardDeck, TopCard, Converti
             
             else:
                 validcardtoplace = False
-                print("Please Choose a card with the same top card colour. The current top card colour is", TopCard[0])
+                print("Please Choose a card with the same top card colour or the same number. The current top card colour is", TopCard[0])
             
         colour, cardnum = NameToTable(cardToPlace, ConvertionTable)
         TopCard = cardToPlace
@@ -346,7 +349,8 @@ def PlaceCard(PlayerCards, NextPlayerCards, Deck, DiscardDeck, TopCard, Converti
         PlayerCards.remove(cardToPlace)
         
         if cardToPlace[0] == 'w':
-            if cardToPlace[1:2] == 'd4':
+            if cardToPlace[1:3] == 'd4':
+                print("d4")
                 NextPlayerCards, Deck = AddCards(NextPlayerCards, 4, Deck, ConvertionTable)
                 NextPlayerCards = OrganiseCards(NextPlayerCards)                
             
@@ -359,22 +363,28 @@ def PlaceCard(PlayerCards, NextPlayerCards, Deck, DiscardDeck, TopCard, Converti
                 TopCard = 'g'
             else:
                 TopCard = 'b'
-            again = True
+            again = False
+            
         if cardToPlace[1] == 'r':
             if direction == "Positive":
                 direction = "Negative"
             else:
                 direction = "Positive"
-        if cardToPlace[1:2] == 'd2':
+                
+        if cardToPlace[1:3] == 'd2':
             NextPlayerCards, Deck = AddCards(NextPlayerCards, 2, Deck, ConvertionTable)
             NextPlayerCards = OrganiseCards(NextPlayerCards)
         
+        if cardToPlace[1] == "s":
+            print("skip")
+            
+        
     else:
-        PlayerCards, Deck, newcard = PickUpCard(PlayerCards, Deck, ConvertionTable)
+        PlayerCards, Deck, newcard, again = PickUpCard(PlayerCards, Deck, ConvertionTable)
         print("Your New Card Was:", newcard)
 
     PlayerCards = OrganiseCards(PlayerCards)
-    return PlayerCards, NextPlayerCards, DiscardDeck, TopCard, again, direction
+    return PlayerCards, NextPlayerCards, DiscardDeck, TopCard, again, direction, skip 
     
 def NameToTable(card, table):
     cardnum = 0
@@ -404,8 +414,8 @@ def NameToTable(card, table):
 
 def PickUpCard(PlayerCards, deck, ConvertionTable):
     PlayerCards, deck, card = AddCardReturnCardAdded(PlayerCards, deck, ConvertionTable)
-    
-    return PlayerCards, deck, card
+    again = True
+    return PlayerCards, deck, card, again
     
 
 
